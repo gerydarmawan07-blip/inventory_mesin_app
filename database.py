@@ -1,30 +1,24 @@
 from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker, relationship
+from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 
-# ---------------------------
 # Database setup
-# ---------------------------
-DATABASE_URL = "sqlite:///inventory_mesin.db"  # SQLite lokal
+DATABASE_URL = "sqlite:///inventory_mesin.db"
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 Session = sessionmaker(bind=engine)
 session = Session()
 Base = declarative_base()
 
-# ---------------------------
 # Tabel User
-# ---------------------------
 class User(Base):
     __tablename__ = "user"
     id = Column(Integer, primary_key=True)
     username = Column(String, unique=True, nullable=False)
     password = Column(String, nullable=False)
-    role = Column(String, default="user")  # "admin" atau "user"
+    role = Column(String, default="user")
 
-# ---------------------------
 # Tabel Mesin
-# ---------------------------
 class Mesin(Base):
     __tablename__ = "mesin"
     id = Column(Integer, primary_key=True)
@@ -44,9 +38,7 @@ class Mesin(Base):
     kondisi_mesin = Column(String, default="Baik")
     keterangan = Column(String, nullable=True)
 
-# ---------------------------
 # Tabel History
-# ---------------------------
 class History(Base):
     __tablename__ = "history"
     id = Column(Integer, primary_key=True)
@@ -54,14 +46,10 @@ class History(Base):
     aksi = Column(String)
     waktu = Column(DateTime, default=datetime.now)
 
-# ---------------------------
-# Buat tabel jika belum ada
-# ---------------------------
+# Buat tabel
 Base.metadata.create_all(engine)
 
-# ---------------------------
-# Fungsi tambah user (opsional)
-# ---------------------------
+# Fungsi tambah user
 def tambah_user(username, password, role="user"):
     exist = session.query(User).filter_by(username=username).first()
     if exist:
