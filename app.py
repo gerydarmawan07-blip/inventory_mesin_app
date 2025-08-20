@@ -287,4 +287,3 @@ if st.session_state.get("login", False):
                 session.add(History(mesin_id=mesin.id, aksi=f"Jual {jumlah}"))
                 session.commit()
                 st.success(f"{jumlah} mesin berhasil dijual!")
-
