@@ -6,4 +6,3 @@ qrcode
 matplotlib
 openpyxl
 watchdog
-
