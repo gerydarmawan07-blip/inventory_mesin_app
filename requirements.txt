@@ -1,4 +1,9 @@
 streamlit==1.26.0
-pandas==2.1.1
-SQLAlchemy==2.0.20
-openpyxl==3.1.2
+pandas
+sqlalchemy
+bcrypt
+qrcode
+matplotlib
+openpyxl
+watchdog
+
